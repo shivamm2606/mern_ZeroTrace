@@ -8,9 +8,9 @@ import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import errorHandler from './middleware/errorHandler.js';
-
 import secretRoutes from './routes/secretRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+
 
 // 1. Check Environment Variables
 // We need to make sure the app has the keys it needs to work securely.
