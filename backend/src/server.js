@@ -2,8 +2,8 @@ import dotenv from 'dotenv';
 dotenv.config(); // Load environment variables from .env file
 
 import express from 'express';
-import cors from 'cors';
 import helmet from 'helmet';
+import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
