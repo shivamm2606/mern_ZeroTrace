@@ -7,8 +7,8 @@ export const createSecret = async (req, res, next) => {
     try {
         // Grab the data from the frontend request body
         const { text, viewLimit, expiration } = req.body;
-
-        // Basic validation: Check if text exists
+        
+        // Basic validation: Check if text exist
         if (!text) {
             res.status(400);
             throw new Error('Please provide some text to encrypt.');
@@ -81,7 +81,7 @@ export const getSecret = async (req, res, next) => {
             decryptedText = decrypt(secret.encryptedData);
         } catch (err) {
             res.status(400);
-            throw new Error('Could not decrypt data. It might be corrupted.');
+            throw new Error('Could not decrypt data, It might be corrupted.');
         }
 
         // Step 5: Check if we need to delete it NOW
