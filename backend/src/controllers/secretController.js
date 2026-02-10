@@ -63,10 +63,9 @@ export const getSecret = async (req, res, next) => {
 
         // Step 2: Increment the view count
         // We do this first to "count" this attempt
-        
         secret.viewCount = secret.viewCount + 1;
         await secret.save();
-        
+                
         // Step 3: Check if we passed the limit
         // For example, if limit is 5 and this is the 6th view, we should delete it and say "Not Found"
         if (secret.viewCount > secret.viewLimit) {
