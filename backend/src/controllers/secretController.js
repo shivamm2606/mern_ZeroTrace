@@ -63,6 +63,7 @@ export const getSecret = async (req, res, next) => {
 
         // Step 2: Increment the view count
         // We do this first to "count" this attempt
+        
         secret.viewCount = secret.viewCount + 1;
         await secret.save();
         
