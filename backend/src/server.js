@@ -24,8 +24,7 @@ if (!process.env.MONGO_URI) {
     process.exit(1);
 }
 
-// 2. Connect to Database
-connectDB();
+connectDB(); // 2. Connect to Database
 
 const app = express();
 
