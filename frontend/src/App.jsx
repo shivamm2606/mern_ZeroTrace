@@ -14,8 +14,8 @@ function App() {
         toastOptions={{
           style: {
             background: '#18181b', // Zinc-900
-            color: '#e2e8f0',     // Slate-200
-            border: '1px solid #27272a' // Zinc-800
+            border: '1px solid #27272a', // Zinc-800,
+            color: '#e2e8f0'   // Slate-200
           }
         }}
       />
