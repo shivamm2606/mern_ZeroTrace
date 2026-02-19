@@ -14,7 +14,18 @@ const AdminDashboard = () => {
 
   // 2. Fetch data as soon as this page loads
   useEffect(() => {
-    fetchStats();
+    const checkAuthAndFetch = async () => {
+      try {
+        // First, ask backend "Am I logged in?"
+        await axiosInstance.get('/admin/check');
+        // If yes, fetch the stats
+        fetchStats();
+      } catch (error) {
+        // If no, go to login
+        navigate("/admin/login");
+      }
+    };
+    checkAuthAndFetch();
   }, []);
 
   // Helper function to get stats from backend
@@ -23,12 +34,7 @@ const AdminDashboard = () => {
       const res = await axiosInstance.get("/admin/stats");
       setStats(res.data);
     } catch (error) {
-      // If the user isn't logged in (401), send them to login page
-      if (error.response?.status === 401) {
-        navigate("/admin/login");
-      } else {
-        toast.error("Failed to fetch stats");
-      }
+      toast.error("Failed to fetch stats");
     } finally {
       // stop loading whether it worked or failed
       setLoading(false);
