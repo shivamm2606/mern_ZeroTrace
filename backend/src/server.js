@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Allow the frontend to talk to this backend (CORS)
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
     credentials: true,
 }));
 
