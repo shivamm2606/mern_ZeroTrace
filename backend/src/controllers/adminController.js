@@ -23,8 +23,8 @@ export const loginAdmin = async (req, res, next) => {
             // This is safer than localStorage because JS can't read it
             res.cookie('adminToken', token, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
+                secure: process.env.NODE_ENV === 'production', // true in prod (https)
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Cross-site in prod
                 maxAge: 3600000, // 1 hour
             });
 
