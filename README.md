@@ -1,91 +1,124 @@
 # ZeroTrace
 
-> **Share sensitive information securely that vanishes after being read.**
+> **Share sensitive information securely — it vanishes after being read.**
 
-ZeroTrace is a MERN stack application designed to share one-time viewable secrets. Once a secret is viewed, it is permanently deleted from the database.
+ZeroTrace is a **MERN stack web application** built as a learning-focused project to explore **secure secret sharing, encryption, and full-stack development**.
 
-## Features
+The idea is simple but powerful: you create a secret (password, API key, or private message), share a unique link, and **once it’s viewed, it’s permanently deleted** from the database. 
 
-- **Create a Secret:** Generate a secure link for your sensitive text.
-- **One-Time View:** The secret is deleted immediately after it is accessed.
-- **Secure:** secrets are stored encrypted (AES) in the database.
-- **Mobile Friendly:** Responsive design for all devices.
+No history.
+No recovery.
+No trace. 🕶️
 
-## Tech Stack
 
-- **Backend**: Node.js, Express, MongoDB (Mongoose), Crypto (Native Node module).
-- **Frontend**: React (Vite), Tailwind CSS, Axios, React Router.
-- **Security**: Helmet, CORS, Rate Limiting, Joi Validation, HttpOnly Cookies.
+---
 
-## Prerequisites
+## 🚀 Features
 
-- Node.js (v14+)
-- MongoDB (Running locally or Atlas URI)
+- **Create Secrets**  
+  Generate a unique, one-time link for sensitive information.
+- **One-Time View (Self-Destruct)**  
+  The secret is destroyed immediately after being accessed.
+- **Encrypted Storage**  
+  Secrets are encrypted using **AES encryption**, ensuring even database admins cannot read them.
+- **Secure by Design**  
+  Helmet, CORS, rate limiting, validation, and secure cookies are implemented.
+- **Responsive UI**  
+  Fully mobile-friendly interface built with Tailwind CSS.
 
-## Installation
+---
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository_url>
-   cd ZeroTrace
-   ```
+## 🛠️ Tech Stack
 
-2. **Backend Setup**
-   ```bash
-   cd backend
-   npm install
-   ```
-   
-   Create a `.env` file in `backend/` based on `.env.example`:
-   ```env
-   PORT=5000
-   MONGO_URI=mongodb://127.0.0.1:27017/vanishpass
-   JWT_SECRET=your_super_secret_jwt_key
-   ENCRYPTION_KEY=12345678901234567890123456789012  # Must be 32 chars
-   ADMIN_PASSWORD=admin
-   ```
+### Backend
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- Crypto module (AES Encryption)
+- Helmet
+- CORS
+- Rate Limiting
+- Joi Validation
+- HttpOnly Cookies
 
-3. **Frontend Setup**
-   ```bash
-   cd ../frontend
-   npm install
-   ```
+### Frontend
+- React (Vite)
+- Tailwind CSS
+- Axios
+- React Router
 
-## Running Locally
+---
 
-1. **Start Backend**
-   ```bash
-   # In backend directory
-   npm run dev
-   ```
-   Server will run on `http://localhost:5000`.
+## ⚙️ Installation & Setup
 
-2. **Start Frontend**
-   ```bash
-   # In frontend directory
-   npm run dev
-   ```
-   Open `http://localhost:5173` in your browser.
+### 1️⃣ Clone the Repository
+```bash
+git clone <repository_url>
+cd ZeroTrace
+```
 
-## Deployment
+### 2️⃣ Backend Setup
+```bash
+cd backend
+npm install
+```
 
-### Vercel (Frontend)
-1. Push code to GitHub.
-2. Import `frontend` directory project in Vercel.
-3. Build command: `npm run build`.
-4. Output directory: `dist`.
-5. Add configuration if needed for routing (configured in code).
+Create a `.env` file inside the backend folder (or copy from `.env.example`):
+```env
+PORT=5000
+MONGO_URI=your_mongo_uri
+JWT_SECRET=your_super_secret_jwt_key
+ENCRYPTION_KEY=your_encryption_key
+ADMIN_PASSWORD=your_admin_password
+```
+*Note: `ENCRYPTION_KEY` must be exactly 32 characters long.*
 
-### Render (Backend)
-1. Create a Web Service on Render connected to the repo.
-2. Root Directory: `backend`.
-3. Build Command: `npm install`.
-4. Start Command: `npm start`.
-5. Add Environment Variables: `MONGO_URI`, `JWT_SECRET`, `ENCRYPTION_KEY`, `ADMIN_PASSWORD`.
+Start the backend server:
+```bash
+npm run dev
+```
+Server runs at: `http://localhost:5000`
 
-## API Endpoints
+### 3️⃣ Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Open in browser: `http://localhost:5173`
 
-- `POST /api/secrets`: Create a new secret.
-- `GET /api/secrets/:id`: Reveal and destroy a secret.
-- `POST /api/admin/login`: Admin login.
-- `GET /api/admin/stats`: Get active secret count.
+---
+
+## 🔌 API Endpoints
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| POST | `/api/secrets` | Create a new secret |
+| GET | `/api/secrets/:id` | View & destroy a secret |
+| POST | `/api/admin/login` | Admin authentication |
+| GET | `/api/admin/stats` | Get active secret count |
+
+---
+
+## 🚀 Deployment
+
+### Frontend (Vercel)
+1. Push repository to GitHub
+2. Import `frontend` directory in Vercel
+3. Build Command: `npm run build`
+4. Output Directory: `dist`
+5. Configure routing if required
+
+### Backend (Render)
+1. Create a new Web Service
+2. Root Directory: `backend`
+3. Build Command: `npm install`
+4. Start Command: `npm start`
+5. Add all required environment variables (MONGO_URI, JWT_SECRET, ENCRYPTION_KEY, ADMIN_PASSWORD) in the Render dashboard.
+
+---
+
+## 🙏 Conclusion
+ZeroTrace was built to deeply understand backend security, encryption, REST APIs, and frontend–backend integration using the MERN stack.
+
+If you find bugs or have suggestions, feel free to open an issue or contribute.
+Thanks for checking it out! 🚀
