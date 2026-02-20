@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axiosInstance from '../api/axiosInstance';
 import { Eye, EyeOff, AlertTriangle, Copy, Check } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const RevealCard = ({ id }) => {
     // State to hold the decrypted secret text from the API
