@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axiosInstance from '../api/axiosInstance';
 import { Eye, EyeOff, AlertTriangle, Copy, Check } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 const RevealCard = ({ id }) => {
     // State to hold the decrypted secret text from the API
@@ -86,7 +86,7 @@ const RevealCard = ({ id }) => {
                                 <Eye className="w-4 h-4" /> Secret Revealed
                             </h2>
                             <span className="px-2 py-0.5 bg-red-500/10 text-red-500 text-xs font-medium rounded border border-red-500/20">
-                                secret deleted
+                                Deleted
                             </span>
                         </div>
 
