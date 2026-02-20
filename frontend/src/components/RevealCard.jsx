@@ -86,7 +86,7 @@ const RevealCard = ({ id }) => {
                                 <Eye className="w-4 h-4" /> Secret Revealed
                             </h2>
                             <span className="px-2 py-0.5 bg-red-500/10 text-red-500 text-xs font-medium rounded border border-red-500/20">
-                                Deleted
+                                Secret Deleted
                             </span>
                         </div>
 
