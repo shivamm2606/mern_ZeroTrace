@@ -35,7 +35,7 @@ export const loginAdmin = async (req, res, next) => {
 
         } else {
             res.status(401);
-            throw new Error('Wrong password');
+            throw new Error('Wrong password!');
         }
     } catch (error) {
         next(error);
