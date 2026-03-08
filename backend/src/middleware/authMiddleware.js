@@ -9,7 +9,7 @@ export const protect = (req, res, next) => {
 
     if (!token) {
         res.status(401);
-        const error = new Error('Not authorized, no token');
+        const error = new Error('Not authorized, no token!');
         return next(error);
     }
 
