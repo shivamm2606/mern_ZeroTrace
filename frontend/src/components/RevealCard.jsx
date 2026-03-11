@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axiosInstance from '../api/axiosInstance';
 import { Eye, EyeOff, AlertTriangle, Copy, Check } from 'lucide-react';
 import toast from 'react-hot-toast';
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 
 const RevealCard = ({ id }) => {
@@ -120,7 +121,7 @@ const RevealCard = ({ id }) => {
                             <EyeOff className="w-8 h-8 text-slate-500" />
                         </div>
                         <h2 className="text-xl font-medium text-slate-100 mb-2">Secure Message</h2>
-                        <p className="text-slate-500 mb-8 text-sm">This message is encrypted. Click to reveal.</p>
+                        <p className="text-slate-500 mb-8 text-sm">This message is encrypted, Click to reveal.</p>
 
                         <button
                             onClick={handleReveal}
