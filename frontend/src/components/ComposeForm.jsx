@@ -63,6 +63,7 @@ const ComposeForm = () => {
     try {
       await navigator.clipboard.writeText(resultUrl);
       toast.success("Copied!");
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
       toast.error("Failed to copy");
     }
@@ -80,7 +81,7 @@ const ComposeForm = () => {
             Link Ready
           </h2>
           <p className="text-slate-500 text-sm">
-            Share this link carefully. It will vanish after use.
+            Share this link carefully, It will vanish after use.
           </p>
         </div>
 
