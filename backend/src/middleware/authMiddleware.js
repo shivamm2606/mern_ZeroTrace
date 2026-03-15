@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const protect = (req, res, next) => {
+const verifyJWT = (req, res, next) => {
   let token;
 
   if (req.cookies && req.cookies.adminToken) {
@@ -24,4 +24,4 @@ const protect = (req, res, next) => {
   }
 };
 
-export { protect };
+export { verifyJWT };
