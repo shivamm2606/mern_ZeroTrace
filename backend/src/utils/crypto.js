@@ -25,7 +25,7 @@ export const decrypt = (encryptedText) => {
   const originalText = bytes.toString(CryptoJS.enc.Utf8);
 
   if (!originalText) {
-    throw new Error("Decryption failed - invalid key or corrupted data");
+    throw new Error("Decryption failed, invalid key or corrupted data");
   }
 
   return originalText;
