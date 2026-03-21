@@ -1,71 +1,52 @@
 import jwt from "jsonwebtoken";
 import Secret from "../models/Secret.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-// Helper to make a JWT token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
 };
 
-// Login function
-export const loginAdmin = async (req, res, next) => {
-  try {
-    const { password } = req.body;
-
-    // Step 1: Check the password (Simple hardcoded check)
-    if (password === process.env.ADMIN_PASSWORD) {
-      // Step 2: Create a token so they stay logged in
-      const token = generateToken("admin");
-
-      // Step 3: Save token in a HTTP-only cookie
-      // This is safer than localStorage because JS can't read it
-      res.cookie("adminToken", token, {
-        httpOnly: true,
-        secure: true, // Always true for cross-site (requires HTTPS)
-        sameSite: "none", // Allow cross-site
-        maxAge: 3600000, // 1 hour
-      });
-
-      res.json({
-        success: true,
-        message: "Admin logged in successfully",
-      });
-    } else {
-      res.status(401);
-      throw new Error("Wrong password!");
-    }
-  } catch (error) {
-    next(error);
-  }
+const cookieOptions = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  maxAge: 3600000,
 };
 
-// Get Dashboard Stats
-export const getStats = async (req, res, next) => {
-  try {
-    // Count how many secrets are currently in the database
-    const secretCount = await Secret.countDocuments();
+export const loginAdmin = asyncHandler(async (req, res) => {
+  const { password } = req.body;
 
-    res.json({
-      success: true,
-      activeSecrets: secretCount,
-    });
-  } catch (error) {
-    next(error);
+  // Simple hardcoded check
+  if (password !== process.env.ADMIN_PASSWORD) {
+    res.status(401);
+    throw new Error("Wrong password!");
   }
-};
 
-// Logout
-export const logoutAdmin = (req, res) => {
-  // Clear the cookie by setting it to expire instantly
-  res.clearCookie("adminToken", {
-    httpOnly: true,
-    secure: true,
+  const token = generateToken("admin");
+
+  res.cookie("adminToken", token, cookieOptions).json({
+    success: true,
+    message: "Admin logged in successfully",
   });
-  res.status(200).json({ success: true, message: "Logged out" });
-};
+});
 
-// Simple check to see if user is logged in
-export const checkAuth = (req, res) => {
+export const getStats = asyncHandler(async (req, res) => {
+  const secretCount = await Secret.countDocuments();
+  res.json({
+    success: true,
+    activeSecrets: secretCount,
+  });
+});
+
+export const logoutAdmin = asyncHandler(async (req, res) => {
+  res
+    .status(200)
+    .clearCookie("adminToken", { httpOnly: true, secure: true })
+    .json({ success: true, message: "Logged out" });
+});
+
+export const checkAuth = asyncHandler(async (req, res) => {
   res.status(200).json({ success: true, isAdmin: true });
-};
+});
