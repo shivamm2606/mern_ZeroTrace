@@ -8,4 +8,4 @@ router.route('/').post(validateSecret, createSecret);
 
 router.route('/:id').get(getSecret);
 
-export default router;backend/src/routes/secretRoutes.js
+export default router;
