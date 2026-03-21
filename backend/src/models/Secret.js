@@ -23,7 +23,7 @@ const secretSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-// Create a TTL index on the expiresAt field
+// Create a TTL index on expiresAt 
 secretSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 export default mongoose.model('Secret', secretSchema);
