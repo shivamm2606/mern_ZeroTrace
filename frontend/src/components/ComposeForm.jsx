@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosInstance from "../api/axiosInstance";
 import toast from "react-hot-toast";
 import { Copy, Loader2, Link, ShieldCheck, ChevronDown } from "lucide-react";
@@ -16,6 +16,10 @@ const ComposeForm = () => {
   // State for our dropdown options (View Limit and Expiration)
   const [viewLimit, setViewLimit] = useState(1);
   const [expiration, setExpiration] = useState(1440); // 1440 minutes = 1 day
+
+  useEffect(() => {
+  axiosInstance.get("/health").catch(() => {});
+}, []);
 
   // Function to handle form submission
   const handleSubmit = async (e) => {

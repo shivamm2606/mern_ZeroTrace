@@ -12,7 +12,6 @@ import secretRoutes from './routes/secretRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 
 
-
 if (!process.env.ENCRYPTION_KEY || process.env.ENCRYPTION_KEY.length !== 32) {
     console.error('ERROR: Missing ENCRYPTION_KEY (Must be 32 characters)');
     process.exit(1); 
@@ -43,6 +42,8 @@ const limiter = rateLimit({
     max: 100, 
     message: 'Too many requests from this IP please try again later',
 });
+
+app.get('/api/health', (req, res) => res.status(200).json({ status: 'ok' }));
 
 app.use('/api', limiter);
 
