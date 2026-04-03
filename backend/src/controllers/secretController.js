@@ -53,7 +53,7 @@ export const getSecret = asyncHandler(async (req, res) => {
 
   let decryptedText;
   try {
-    decryptedText = decrypt(secret.encryptedData);
+    decryptedText = decrypt(secret.encryptedData, secret.iv);
   } catch (err) {
     res.status(400);
     throw new Error("Could not decrypt data. It might be corrupted.");
