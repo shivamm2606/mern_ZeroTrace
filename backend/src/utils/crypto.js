@@ -1,27 +1,23 @@
-import CryptoJS from "crypto-js";
+import { randomBytes, createCipheriv, createDecipheriv } from 'crypto';
 
 export const encrypt = (text) => {
-  const secretKey = process.env.ENCRYPTION_KEY;
-  if (!secretKey) throw new Error("Missing ENCRYPTION_KEY in .env file");
-
-  const encrypted = CryptoJS.AES.encrypt(text, secretKey).toString();
-
+  const key = Buffer.from(process.env.ENCRYPTION_KEY, 'utf8');
+  const iv = randomBytes(16);
+  const cipher = createCipheriv('aes-256-cbc', key, iv);
+  const encrypted = Buffer.concat([cipher.update(text, 'utf8'), cipher.final()]);
   return {
-    encryptedData: encrypted,
-    iv: "generated_automatically",
+    encryptedData: encrypted.toString('hex'),
+    iv: iv.toString('hex'),
   };
 };
 
-export const decrypt = (encryptedText) => {
-  const secretKey = process.env.ENCRYPTION_KEY;
-  if (!secretKey) throw new Error("Missing ENCRYPTION_KEY in .env file");
-
-  const bytes = CryptoJS.AES.decrypt(encryptedText, secretKey);
-  const originalText = bytes.toString(CryptoJS.enc.Utf8);
-
-  if (!originalText) {
-    throw new Error("Decryption failed, invalid key or corrupted data");
-  }
-
-  return originalText;
+export const decrypt = (encryptedHex, ivHex) => {
+  const key = Buffer.from(process.env.ENCRYPTION_KEY, 'utf8');
+  const iv = Buffer.from(ivHex, 'hex');
+  const decipher = createDecipheriv('aes-256-cbc', key, iv);
+  const decrypted = Buffer.concat([
+    decipher.update(Buffer.from(encryptedHex, 'hex')),
+    decipher.final(),
+  ]);
+  return decrypted.toString('utf8');
 };
