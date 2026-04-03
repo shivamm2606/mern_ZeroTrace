@@ -4,7 +4,7 @@
 
 ZeroTrace is a **MERN stack web application** built as a learning-focused project to explore **secure secret sharing, encryption, and full-stack development**.
 
-The idea is simple but powerful: you create a secret (password, API key, or private message), share a unique link, and **once it’s viewed, it’s permanently deleted** from the database. 
+The idea is simple but powerful: you create a secret (password, API key, or private message), share a unique link, and **once view limit is reached, it’s permanently deleted** from the database. 
 
 No history.
 No recovery.
