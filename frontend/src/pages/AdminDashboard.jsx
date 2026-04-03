@@ -5,23 +5,17 @@ import { Shield, Activity, LogOut } from "lucide-react";
 import toast from "react-hot-toast";
 
 const AdminDashboard = () => {
-  // 1. State for holding our data and UI status
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Hook to move to different pages
   const navigate = useNavigate();
 
-  // 2. Fetch data as soon as this page loads
   useEffect(() => {
     const checkAuthAndFetch = async () => {
       try {
-        // First, ask backend "Am I logged in?"
         await axiosInstance.get('/admin/check');
-        // If yes, fetch the stats
         fetchStats();
       } catch (error) {
-        // If no, go to login
         navigate("/admin/login");
       }
     };
@@ -36,7 +30,6 @@ const AdminDashboard = () => {
     } catch (error) {
       toast.error("Failed to fetch stats");
     } finally {
-      // stop loading whether it worked or failed
       setLoading(false);
     }
   };
